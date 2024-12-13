@@ -1,16 +1,16 @@
-export const BlogUrl = 'https://blog.plumbiu.top/'
+export const BlogUrl = 'https://luoqi.us.kg/'
 
-export const BlogAuthor = 'Plumbiu'
+export const BlogAuthor = 'LUOQI'
 
-export const GithubName = BlogAuthor
+export const GithubName = "keirosang"
 
-export const RepoName = 'blog'
+export const RepoName = 'blog_Plumbiu'
 
-export const RepoUrl = `https://github.com/Plumbiu/${RepoName}`
+export const RepoUrl = `https://github.com/keirosang/${RepoName}`
 
 export const RepoLinksUrl = `${RepoUrl}/blob/main/data/links.json`
 
-export const BilibiliId = '227616086'
+export const BilibiliId = '11071956'
 
 export const IS_GITPAGE = !!process.env.GITPAGE
 export const BasePath = IS_GITPAGE ? `/${RepoName}` : ''

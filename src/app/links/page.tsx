@@ -59,14 +59,14 @@ async function Links() {
           </div>
         ))}
       </div>
-      <Link
+      {/* <Link
         aria-label="Read more about links config file"
         href={RepoLinksUrl}
         className="link"
         target="_blank"
       >
         see `links.json`
-      </Link>
+      </Link> */}
     </div>
   )
 }

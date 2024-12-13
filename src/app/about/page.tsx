@@ -12,34 +12,35 @@ function About() {
     <div className={cn(styles.wrap, 'center')}>
       <h1 className={styles.hi}> Hi, I'm {BlogAuthor} 👋</h1>
       <div className={styles.tag}>
-        <Tag icon="#">Developer</Tag>
-        <Tag icon="#">Student</Tag>
+        <Tag icon="#">Engineer</Tag>
+        <Tag icon="#">Business Owner</Tag>
       </div>
       <div className={styles.desc}>
-        I'm a college student from China, currently studying electronic
-        information at Hangzhou Dianzi University. Passion for open source and
-        recording my learning experience. I really hope you can give me
-        constructive suggestions on my blog. THX !
+      I am a farmer from an eastern country with 18 years of coding experience.<br />
+      I am very proficient in using programming tools and maintaining operating systems.<br />
+      I use CTRL+C/CTRL+V for coding work all year round,<br />
+      The C/V keys on my keyboard are severely worn out,<br />
+      I have been doing low-level coding for a long time, which resulted in very low-quality coding.<br />
       </div>
       <ul>
-        <li>I started learning programming in 2021.</li>
-        <li>I landed my first job as a Web developer in 2024.03.16</li>
-        <li>I started building this blog in 2024.10.01</li>
+        <li>I started learning programming in 2004.</li>
+        <li>I started coding in 2006 and have been doing it ever since.</li>
+        <li>The number of my BUG records has exceeded 1 million, and the resolution rate is 89.0%.</li>
       </ul>
       <div></div>
       <div className={styles.tag}>
-        <Tag icon="#">Web</Tag>
-        <Tag icon="#">Programming</Tag>
+        <Tag icon="#">Full Stack Developer</Tag>
+        <Tag icon="#">System architect</Tag>
       </div>
       <div>
-        If you are interested in this blog:{' '}
+        {/* If you are interested in this blog:{' '}
         <Link
           className="link"
           target="_blank"
           href="/posts/blog/How-I-Build-My-Blog"
         >
           How this blog works
-        </Link>
+        </Link> */}
       </div>
       <div className={styles.links}>
         <Link target="_blank" href={`https://github.com/${GithubName}`}>
