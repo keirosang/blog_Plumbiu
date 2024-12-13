@@ -4,10 +4,11 @@ import { ImageProps } from 'next/image'
 import { toString } from 'hast-util-to-string'
 import MarkdownImage from '@/app/posts/components/Image'
 import { handleComponentName } from '@/plugins/constant'
-import { isUnOptimized, resolveAssetPath } from '@/utils'
+import { isUnOptimized, resolveAssetPath, isExternalImage } from '@/utils'
 import CustomComponent from '~/data/components'
 import { getBlurDataUrl } from '@/utils/node/optimize'
 import PreComponent from '../components/Pre'
+import { downloadImage } from '@/utils/node/images'
 
 export const markdownComponents: Partial<Components> = {
   pre(props) {
@@ -28,20 +29,47 @@ export const markdownComponents: Partial<Components> = {
     if (!src || !alt) {
       return null
     }
-    const imagePath = path.join('public', 'images', src)
-    const { base64, metadata } = await getBlurDataUrl(imagePath)
-    if (!base64 || !metadata) {
-      return null
+
+    let finalSrc = src
+    if (isExternalImage(src)) {
+      try {
+        // 下载外部图片并获取本地文件名
+        const localFileName = await downloadImage(src)
+        finalSrc = localFileName
+      } catch (error) {
+        console.error('Failed to download image:', src, error)
+        // 如果下载失败，继续使用原始URL
+      }
     }
+
     const commonProps: ImageProps = {
-      src: resolveAssetPath(`images/${src}`),
+      src: isExternalImage(finalSrc) ? finalSrc : resolveAssetPath(`images/${finalSrc}`),
       alt,
-      unoptimized: isUnOptimized(src),
-      blurDataURL: base64,
-      placeholder: 'blur',
-      width: metadata.width,
-      height: metadata.height,
+      unoptimized: isUnOptimized(finalSrc),
     }
+
+    // 获取图片信息
+    const imagePath = path.join('public', 'images', finalSrc)
+    try {
+      const { base64, metadata } = await getBlurDataUrl(imagePath)
+      if (base64 && metadata) {
+        Object.assign(commonProps, {
+          blurDataURL: base64,
+          placeholder: 'blur',
+          width: metadata.width,
+          height: metadata.height,
+        })
+      }
+    } catch (error) {
+      console.error('Failed to get image metadata:', finalSrc, error)
+      // 如果获取元数据失败，使用默认尺寸
+      Object.assign(commonProps, {
+        width: 800,
+        height: 600,
+        style: { width: '100%', height: 'auto' }
+      })
+    }
+
     return <MarkdownImage {...commonProps} />
   },
   // @ts-ignore

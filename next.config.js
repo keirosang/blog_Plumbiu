@@ -38,6 +38,9 @@ const nextConfig = {
   images: {
     minimumCacheTTL: 31536000,
     path: `${BasePath}/_next/image`,
+    domains: [
+      'luoqi-china.com'
+    ],
   },
   output: IS_GITPAGE ? 'export' : undefined,
   async rewrites() {

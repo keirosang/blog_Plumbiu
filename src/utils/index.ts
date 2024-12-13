@@ -42,3 +42,7 @@ export function isUnOptimized(url: string) {
     ? true
     : undefined
 }
+
+export const isExternalImage = (src: string) => {
+  return src.startsWith('http://') || src.startsWith('https://')
+}
