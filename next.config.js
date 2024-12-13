@@ -12,7 +12,7 @@ const withBundleAnalyzer = Analyzer({
 const withClassnamesMinifier = classnamesMinifier({
   prefix: '_',
   reservedNames: ['_en', '_de'],
-  disabled: process.env.NODE_ENV === 'development', //set production or development mode
+  disabled: process.env.NODE_ENV === 'production', //set production or development mode
 })
 
 /**
